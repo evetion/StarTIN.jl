@@ -1,0 +1,13 @@
+name = "startinj"
+uuid = "152385ed-0447-47b3-b417-bbbf3d580ece"
+authors = ["Maarten Pronk <git@evetion.nl> and contributors"]
+version = "0.1.0"
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
