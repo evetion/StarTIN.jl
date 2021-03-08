@@ -23,3 +23,7 @@ value = interpolate_linear(t, 0.5, 0.5)
 
 write!("test.obj", t)
 ```
+
+# TODO
+- Add support for DT options, such as random walking or not
+- Add support for retrieving all stars/triangles

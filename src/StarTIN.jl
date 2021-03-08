@@ -1,7 +1,6 @@
 module StarTIN
 using Libdl
-
-const startin = "libstartin"
+using startin_jll
 
 struct Star
     pt::Vector{Float64} # length 3
@@ -21,7 +20,7 @@ end
 mutable struct DT
     ptr::Ptr{Triangulation}
     function DT()
-        ptr = ccall((:new, startin), Ptr{Triangulation}, ())
+        ptr = ccall((:new, libstartin), Ptr{Triangulation}, ())
         dt = new(ptr)
         finalizer(destroy!, dt)
         dt
@@ -32,32 +31,32 @@ end
 function Base.insert!(t::DT, points::Matrix{Float64})
     w, h = size(points)
     w == 3 || error("Point array should be 3 dimensional, got $w dimensions.")
-    res = ccall((:insert, startin), Cint, (Ptr{Triangulation}, Cint, Ref{Cdouble}), t.ptr, length(points), points)
+    res = ccall((:insert, libstartin), Cint, (Ptr{Triangulation}, Cint, Ref{Cdouble}), t.ptr, length(points), points)
     res == 0 || @warn "$res duplicate points encountered."
     res
 end
 
 function info(t::DT)
-    ccall((:debug, startin), Cint, (Ptr{Triangulation},), t.ptr)
+    ccall((:debug, libstartin), Cint, (Ptr{Triangulation},), t.ptr)
 end
 
 function interpolate_nn(t::DT, x::Float64, y::Float64)
-    ccall((:interpolate_nn, startin), Cdouble, (Ptr{Triangulation}, Cdouble, Cdouble), t.ptr, x, y)
+    ccall((:interpolate_nn, libstartin), Cdouble, (Ptr{Triangulation}, Cdouble, Cdouble), t.ptr, x, y)
 end
 function interpolate_linear(t::DT, x::Float64, y::Float64)
-    ccall((:interpolate_linear, startin), Cdouble, (Ptr{Triangulation}, Cdouble, Cdouble), t.ptr, x, y)
+    ccall((:interpolate_linear, libstartin), Cdouble, (Ptr{Triangulation}, Cdouble, Cdouble), t.ptr, x, y)
 end
 function interpolate_laplace(t::DT, x::Float64, y::Float64)
-    ccall((:interpolate_laplace, startin), Cdouble, (Ptr{Triangulation}, Cdouble, Cdouble), t.ptr, x, y)
+    ccall((:interpolate_laplace, libstartin), Cdouble, (Ptr{Triangulation}, Cdouble, Cdouble), t.ptr, x, y)
 end
 
 function write!(fn::AbstractString, t::DT)
-    ccall((:write_obj, startin), Cint, (Ptr{Triangulation}, Cstring), t.ptr, fn)
+    ccall((:write_obj, libstartin), Cint, (Ptr{Triangulation}, Cstring), t.ptr, fn)
 end
 
 function destroy!(t::DT)
     @debug "Cleaning up memory."
-    ccall((:destroy, startin), Cint, (Ptr{Triangulation},), t.ptr)
+    ccall((:destroy, libstartin), Cint, (Ptr{Triangulation},), t.ptr)
 end
 
 export DT
