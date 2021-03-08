@@ -1,12 +1,12 @@
 ```@meta
-CurrentModule = startinj
+CurrentModule = StarTIN
 ```
 
-# startinj
+# StarTIN
 
 ```@index
 ```
 
 ```@autodocs
-Modules = [startinj]
+Modules = [StarTIN]
 ```

@@ -10,9 +10,9 @@ jobs:
       fail-fast: false
       matrix:
         version:
-          - '1.0'
-          - '1.5'
-          - 'nightly'
+          - "1.0"
+          - "1.5"
+          - "nightly"
         os:
           - ubuntu-latest
           - macOS-latest
@@ -44,7 +44,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: julia-actions/setup-julia@v1
         with:
-          version: '1'
+          version: "1"
       - run: |
           julia --project=docs -e '
             using Pkg
@@ -53,8 +53,8 @@ jobs:
       - run: |
           julia --project=docs -e '
             using Documenter: doctest
-            using startinj
-            doctest(startinj)'
+            using StarTIN
+            doctest(StarTIN)'
       - run: julia --project=docs docs/make.jl
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
