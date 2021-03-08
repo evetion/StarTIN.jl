@@ -4,7 +4,7 @@
 [![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://evetion.github.io/StarTIN.jl/dev)
 [![Build Status](https://github.com/evetion/StarTIN.jl/workflows/CI/badge.svg)](https://github.com/evetion/StarTIN.jl/actions)
 
-A Julia wrapper around the Delaunay triangulator [startin](https://github.com/hugoledoux/startin) written in Rust by [Hugo Ledoux](https://3d.bk.tudelft.nl/hledoux).
+A Julia wrapper around the Delaunay triangulator [startin](https://github.com/hugoledoux/startin) written in Rust by @hugoledoux.
 
 # Install
 ```julia
