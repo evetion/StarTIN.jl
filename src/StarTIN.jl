@@ -42,14 +42,12 @@ function Base.insert!(t::DT, point::Vector{Float64})
     w = length(point)
     w == 3 || error("Point array should be 3 dimensional, got $w dimensions.")
     res = ccall((:insert_one_pt, libstartin), Cint, (Ptr{Triangulation}, Cdouble, Cdouble, Cdouble), t.ptr, point[1], point[2], point[3])
-    res == 0 || @warn "Error inserting point."
+    res == 0 && @warn "Error inserting point."
     res
 end
 
 function Base.delete!(t::DT, pointid)
-    res = ccall((:remove, libstartin), Cint, (Ptr{Triangulation}, Cint), t.ptr, pointid)
-    res == 0 || @warn "$res duplicate points encountered."
-    res
+    ccall((:remove, libstartin), Cint, (Ptr{Triangulation}, Cint), t.ptr, pointid)
 end
 
 function info(t::DT)
