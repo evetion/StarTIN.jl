@@ -1,7 +1,7 @@
 name = "StarTIN"
 uuid = "152385ed-0447-47b3-b417-bbbf3d580ece"
 authors = ["Maarten Pronk <git@evetion.nl> and contributors"]
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 Libdl = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
@@ -9,6 +9,7 @@ startin_jll = "c0017dae-bb0d-5ae0-bc81-a2950b9c605d"
 
 [compat]
 julia = "1.3"
+startin_jll = "0.5.3"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
